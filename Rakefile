@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-PostitTemplate::Application.load_tasks
+CarLog::Application.load_tasks
