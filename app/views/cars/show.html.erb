@@ -1,0 +1,35 @@
+
+<h4><%= "#{@car.year}" + " " + "#{@car.make}" + " " + "#{@car.model}" %></h4>
+
+<table border="1" cellpadding="5" cellspacing="5">
+  <tr>
+    <th>Date</th>
+    <th>Mileage</th>
+    <th>Description</th>
+    <th>Vendor</th>
+    <th>Price</th>
+    <th>Action</th>
+  </tr>
+  <% @car.reload.logs.each do |log| %>
+    <tr>
+      <td>
+        <%= "#{log.date}" %>
+      </td>
+           <td>
+        <%= "#{log.mileage}" %>
+      </td>
+      <td>
+        <%= "#{log.description}" %>
+      </td>
+      <td>
+        <%= "#{log.vendor}" %>
+      </td>
+      <td>
+        <%= "#{log.price}" %>
+      </td>
+      <td>
+        <%= link_to '[edit]', '' %>
+      </td>
+    </tr>
+  <% end %>
+</table>

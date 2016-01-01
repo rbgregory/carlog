@@ -1,0 +1,9 @@
+<%= render 'shared/content_title', title: "#{@user.username}'s Cars" %>
+
+<div class='well'>
+  <dl class='dl-horizontal'>
+  <% @user.cars.each do |car| %>
+    <%= link_to "#{car.year} #{car.make} #{car.model}", car_path(car) %>
+  <% end %>
+</div>
+-

@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     if user
       session[:user_id] = user.id
       flash[:notice] = "You've logged in."
-      redirect_to root_path
+      redirect_to user_path(current_user)
     else
       flash[:error] = "There's something wrong with your username or password."
       session[:user_id] = nil

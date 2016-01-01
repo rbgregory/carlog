@@ -3,9 +3,15 @@
     <%= link_to "Car Log", root_path, :class => 'brand' %>
   </li>
 </ul>
-  <div class='nav_item'>
-    <%= link_to 'Register', '', class: 'btn btn-success btn-small' %>
-  </div>
-   <div class='nav_item'>
-    <%= link_to 'Log in', login_path, class: 'btn btn-success btn-small' %>
-  </div>
+  <% if !logged_in? %>
+    <div class='nav_item'>
+      <%= link_to 'Register', '', class: 'btn btn-success btn-small' %>
+    </div>
+    <div class='nav_item'>
+      <%= link_to 'Log in', login_path, class: 'btn btn-success btn-small' %>
+    </div>
+  <% else %>
+    <div class='nav_item'>
+      <%= link_to 'New Log', log_path, class: 'btn btn-success btn-small' %>
+    </div>
+  <% end %>
