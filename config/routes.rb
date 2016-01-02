@@ -8,5 +8,5 @@ CarLog::Application.routes.draw do
 
   resources :users, only: [:create, :edit, :show, :update]
   resources :cars, only: [:create, :edit, :show, :update]
-  resources :logs, only: [:create, :edit, :show, :update]
+  resources :logs
 end
