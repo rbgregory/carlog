@@ -2,7 +2,7 @@
   <%= form_for [@car, @log] do |f| %>
     <div class='control-group'>
       <%= f.label "Service Date", class: 'control-label' %>
-      <%= f.date_select(:date, options = { order: [:month, :day, :year], prompt: { month: 'Select Month', day: 'Select Day', year: 'Select Year' }, start_year: Time.now.year - 5, end_year: Time.now.year, selected: Date.today }, style: "width: 120px;", default: Date.today ) %>
+      <%= f.date_select(:date, options = { order: [:month, :day, :year], prompt: { month: 'Select Month', day: 'Select Day', year: 'Select Year' }, start_year: Time.now.year - 5, end_year: Time.now.year, selected: @log.date }, style: "width: 120px;", default: Date.today ) %>
     </div>
     <div class='control-group'>
       <%= f.label :mileage %>

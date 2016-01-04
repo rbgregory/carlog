@@ -8,7 +8,7 @@ CarLog::Application.routes.draw do
   #get '/cars/:id/log', to: 'logs#new', as: 'log_car'
 
   resources :cars, except: [:destroy] do
-    resources :logs, only: [:new, :create, :edit]
+    resources :logs, only: [:new, :create, :edit, :update]
   end
 
   resources :users, only: [:create, :edit, :show, :update]

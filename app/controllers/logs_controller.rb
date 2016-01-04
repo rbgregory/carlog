@@ -1,9 +1,11 @@
 class LogsController < ApplicationController
+  before_action :set_log, only: [:show, :edit, :update]
 
   def show; end
 
   def new
     @log = Log.new
+    @log.date = Date.today
     @car = Car.find(params[:car_id])
   end
 
@@ -25,15 +27,26 @@ class LogsController < ApplicationController
   end
 
   def edit
-    binding.pry
-    @log = Log.find(params[:id])
     @car = Car.find(params[:car_id])
+  end
+
+  def update
+    if @log.update(log_params)      #mass assignment
+      flash[:notice] = "The log was updated."
+      redirect_to car_path
+    else
+      render :edit
+    end
   end
 
   private
 
   def log_params
     params.require(:log).permit(:date, :mileage, :vendor, :price, :description)
+  end
+
+  def set_log
+    @log = Log.find(params[:id])
   end
 
 end

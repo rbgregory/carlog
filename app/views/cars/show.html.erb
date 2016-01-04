@@ -3,6 +3,7 @@
   <%= link_to 'Add Log',  new_car_log_path(car_id: @car) , class: 'btn btn-primary btn-small' %>
 </div>
 <p/>
+<% if @car.logs.size > 0 %>
 <table border="1" cellpadding="5" cellspacing="5">
   <tr>
     <th>Date</th>
@@ -37,4 +38,6 @@
 </table>
 <p/>
 <h5>Total Expense: <%= "#{number_to_currency(@car.log_total)}" %></h5>
-
+<% else %>
+<h5>No logs have been entered for this car.</h5>
+<% end %>
