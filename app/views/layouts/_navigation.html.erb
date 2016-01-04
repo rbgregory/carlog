@@ -1,17 +1,49 @@
 <ul class="nav">
   <li>
-    <%= link_to "Car Log", root_path, :class => 'brand' %>
+    <% if !logged_in? %>
+      <%= link_to "Car Log", root_path, :class => 'brand' %>
+    <% else %>
+      <%= link_to "Car Log", user_path(current_user), :class => 'brand' %>
+    <% end %>
   </li>
 </ul>
   <% if !logged_in? %>
     <div class='nav_item'>
-      <%= link_to 'Register', '', class: 'btn btn-success btn-small' %>
+      <%= link_to 'Register', register_path, class: 'btn btn-success btn-small' %>
     </div>
     <div class='nav_item'>
       <%= link_to 'Log in', login_path, class: 'btn btn-success btn-small' %>
     </div>
   <% else %>
-    <div class='nav_item'>
-      <%= link_to 'New Log', new_log_path, class: 'btn btn-success btn-small' %>
+    <% if users_path? %>
+      <div class='nav_item'>
+        <%= link_to 'Add Car', new_car_path, class: 'btn btn-success btn-small' %>
+      </div>
+    <% end %>
+    <div class='btn-group nav_item'>
+      <%= link_to '#', class: 'btn btn-small dropdown-toggle', 'data-toggle' => 'dropdown' do %>
+      <%= current_user.username %> <span class='caret'></span>
+    <% end %>
+    <ul class='dropdown-menu'>
+    <% if true %>
+      <li>
+        <%= link_to edit_user_path(current_user) do %>
+          <i class="icon-pencil"></i>
+          Edit profile
+        <% end %>
+      </li>
+      <li>
+        <%= link_to user_path(current_user) do %>
+          <i class="icon-eye-open"></i>
+          View Cars
+        <% end %>
+      </li>
+    <% end %>
+      <li>
+        <%= link_to logout_path(current_user) do %>
+          <i class="icon-circle-arrow-left"></i>
+          Logout
+        <% end %>
+      </li>
     </div>
   <% end %>

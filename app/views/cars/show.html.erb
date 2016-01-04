@@ -1,6 +1,8 @@
-
-<h4><%= "#{@car.year}" + " " + "#{@car.make}" + " " + "#{@car.model}" %></h4>
-
+<h4><%= @car.car_name %></h4>
+<div class='btn_group'>
+  <%= link_to 'Add Log',  new_car_log_path(car_id: @car) , class: 'btn btn-primary btn-small' %>
+</div>
+<p/>
 <table border="1" cellpadding="5" cellspacing="5">
   <tr>
     <th>Date</th>
@@ -25,11 +27,14 @@
         <%= "#{log.vendor}" %>
       </td>
       <td>
-        <%= "#{log.price}" %>
+        <%= "#{number_to_currency(log.price)}" %>
       </td>
       <td>
-        <%= link_to '[edit]', '' %>
+        <%= link_to '[edit]', edit_car_log_path(@car, log) %>
       </td>
     </tr>
   <% end %>
 </table>
+<p/>
+<h5>Total Expense: <%= "#{number_to_currency(@car.log_total)}" %></h5>
+

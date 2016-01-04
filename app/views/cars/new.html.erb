@@ -1,0 +1,36 @@
+<div class='well'>
+  <%= form_for @car do |f| %>
+    <%= render 'shared/errors', obj: @car %>
+    <div class='control-group'>
+      <%= f.label :make %>
+      <%= f.text_field :make %>
+    </div>
+    <div class='control-group'>
+      <%= f.label :model %>
+      <%= f.text_field :model %>
+    </div>
+    <div class='control-group'>
+      <%= f.label :year %>
+      <%= f.number_field :year %>
+    </div>
+    <div class='control-group'>
+      <%= f.label :state %>
+      <%= f.text_field :state %>
+    </div>
+    <div class='control-group'>
+      <%= f.label :plate %>
+      <%= f.text_field :plate %>
+    </div>
+    <div class='control-group'>
+      <%= f.label :vin %>
+      <%= f.text_field :vin %>
+    </div>
+    <div class='control-group'>
+      <%= f.label :notes %>
+      <%= f.text_area :notes %>
+    </div>
+    <p/>
+    <br/>
+    <%= f.submit(@car.new_record? ? 'Submit' : 'Update', class: 'btn btn-primary') %>
+  <% end %>
+</div>

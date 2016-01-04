@@ -3,7 +3,8 @@
 <div class='well'>
   <dl class='dl-horizontal'>
   <% @user.cars.each do |car| %>
-    <%= link_to "#{car.year} #{car.make} #{car.model}", car_path(car) %>
+    <ul>
+      <%= link_to "#{car.year} #{car.make} #{car.model}", car_path(car) %>
+    </ul>
   <% end %>
 </div>
--

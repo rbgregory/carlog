@@ -1,0 +1,26 @@
+<div class='well'>
+  <%= form_for [@car, @log] do |f| %>
+    <div class='control-group'>
+      <%= f.label "Service Date", class: 'control-label' %>
+      <%= f.date_select(:date, options = { order: [:month, :day, :year], prompt: { month: 'Select Month', day: 'Select Day', year: 'Select Year' }, start_year: Time.now.year - 5, end_year: Time.now.year, selected: Date.today }, style: "width: 120px;", default: Date.today ) %>
+    </div>
+    <div class='control-group'>
+      <%= f.label :mileage %>
+      <%= f.number_field :mileage, min: 0 %>
+    </div>
+    <div class='control-group'>
+      <%= f.label :description %>
+      <%= f.text_area :description, rows: 4, class: 'span8' %>
+    </div>
+    <div class='control-group'>
+      <%= f.label :vendor %>
+      <%= f.text_field :vendor %>
+    </div>
+    <div class='control-group'>
+      <%= f.label :price %>
+      <%= f.text_field :price, value: (number_with_precision(f.object.price, precision: 2) || 0) %>
+    </div>
+    <%= f.submit(@log.new_record? ? "Create Log" : 'Update Log', class: 'btn btn-primary') %>
+  <% end %>
+</div>
+

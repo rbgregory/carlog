@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   #helper_method makes these methods available to the view
-  helper_method  :current_user, :logged_in?
+  helper_method  :current_user, :logged_in?, :cars_path?, :users_path?
 
   def current_user
     #if there is an authenticated user, return user obj, else nil
@@ -15,6 +15,14 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     !!current_user
+  end
+
+  def cars_path?
+    request.original_url.include?("/cars/")
+  end
+
+  def users_path?
+    request.original_url.include?("/users/")
   end
 
 end
