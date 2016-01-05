@@ -1,6 +1,6 @@
 class LogsController < ApplicationController
   before_action :set_log, only: [:show, :edit, :update]
-  before_action :set_car, only: [:new, :create, :edit]
+  before_action :set_car, only: [:new, :create, :edit, :update]
 
   def show; end
 
@@ -10,7 +10,6 @@ class LogsController < ApplicationController
   end
 
   def create
-    @car = Car.find(params[:car_id])
     #@log = Log.new(params.require(:log).permit(:log))
     #@log.car = @car
     #@log = @car.logs.build(params.require(:log).permit(:log)) #this line replace the above two
@@ -31,7 +30,7 @@ class LogsController < ApplicationController
   def update
     if @log.update(log_params)      #mass assignment
       flash[:notice] = "The log was updated."
-      redirect_to car_path
+      redirect_to car_path(@car)
     else
       render :edit
     end
