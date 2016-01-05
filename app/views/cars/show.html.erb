@@ -1,8 +1,19 @@
 <h4><%= @car.car_name %></h4>
-<div class='btn_group'>
-  <%= link_to 'Add Log',  new_car_log_path(car_id: @car) , class: 'btn btn-primary btn-small' %>
+<div class='well'>
+  <dl class='dl-horizontal'>
+    <dt>Plate:</dt>
+    <dd><%= "#{@car.state} #{@car.plate}"%></dd>
+    <dt>VIN:</dt>
+    <dd><%= @car.vin %></dd>
+  </dl>
+  <h5>Notes: </h5>
+  <p><%= @car.notes %></p>
+  <div class='btn_group'>
+  <%= link_to 'Update',  edit_car_path(car_id: @car), class: 'btn btn-primary btn-small' %>
 </div>
-<p/>
+
+</div>
+
 <% if @car.logs.size > 0 %>
 <table border="1" cellpadding="5" cellspacing="5">
   <tr>
@@ -41,3 +52,7 @@
 <% else %>
 <h5>No logs have been entered for this car.</h5>
 <% end %>
+<div class='btn_group'>
+  <%= link_to 'Add Log',  new_car_log_path(car_id: @car) , class: 'btn btn-primary btn-small' %>
+</div>
+<p/>

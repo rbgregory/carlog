@@ -25,4 +25,10 @@ class ApplicationController < ActionController::Base
     request.original_url.include?("/users/")
   end
 
+  def access_denied
+    flash[:error] = "You don't have permissions for the requested operation."
+    redirect_to root_path
+  end
+
+
 end

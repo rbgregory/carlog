@@ -1,12 +1,12 @@
 class LogsController < ApplicationController
   before_action :set_log, only: [:show, :edit, :update]
+  before_action :set_car, only: [:new, :create, :edit]
 
   def show; end
 
   def new
     @log = Log.new
     @log.date = Date.today
-    @car = Car.find(params[:car_id])
   end
 
   def create
@@ -26,9 +26,7 @@ class LogsController < ApplicationController
     end
   end
 
-  def edit
-    @car = Car.find(params[:car_id])
-  end
+  def edit; end
 
   def update
     if @log.update(log_params)      #mass assignment
@@ -47,6 +45,14 @@ class LogsController < ApplicationController
 
   def set_log
     @log = Log.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:notice] = "Log does not exist."
+    redirect_to root_path
+  end
+
+  def set_car
+    #@car = Car.find params[:id]
+    @car = Car.find_by slug: params[:car_id]
   end
 
 end

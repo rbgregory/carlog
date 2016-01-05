@@ -1,12 +1,12 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update]
-  before_action :require_same_user, only: [:edit, :update]
+  before_action :require_same_user?, only: [:edit, :update]
 
   def show
     if !logged_in?
       redirect_to root_path
     else
-      @cars = Car.all
+      @cars = Car.all if require_same_user?
     end
   end
 
@@ -50,14 +50,14 @@ class UsersController < ApplicationController
   end
 
   def set_user
-    #@user = User.find_by slug: params[:id]
-    @user = User.find params[:id]
+    @user = User.find_by slug: params[:id]
   end
 
-  def require_same_user
+  def require_same_user?
     if current_user != @user
       flash[:error] = "You are not allowed to do that."
       redirect_to root_path
+      false
     end
   end
 

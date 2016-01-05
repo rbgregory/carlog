@@ -1,4 +1,6 @@
 class User < ActiveRecord::Base
+  include Sluggable
+
   has_many :cars
   has_many :logs
 
@@ -6,6 +8,8 @@ class User < ActiveRecord::Base
 
   validates :username, presence: true, uniqueness: true
   validates :password, presence: true, on: :create, length: {minimum: 3}  #on create: only when creating a user, not updating
+
+  sluggable_column :username
 
   def admin?
     self.role == 'admin'

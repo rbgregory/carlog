@@ -2,7 +2,12 @@ class CarsController < ApplicationController
   before_action :set_car, only: [:show, :edit, :update, :vote]
   helper_method :car_name, :log_total
 
-  def show; end
+  def show
+    if @car.owner != current_user
+      flash[:error] = "Access violation."
+      redirect_to root_path
+    end
+  end
 
   def new
     @car = Car.new
@@ -12,20 +17,32 @@ class CarsController < ApplicationController
     @car = Car.new(car_params)
     @car.owner = current_user
     if @car.save
-      flash[:notice] = "You have added a car."
+      flash[:warning] = "You have added a car."
       redirect_to user_path(current_user)
     else
       render :new
     end
   end
 
+  def edit; end
+
+  def update
+    if @car.update(car_params)      #mass assignment
+      flash[:notice] = "The car information was updated."
+      redirect_to car_path
+    else
+      render :edit
+    end
+  end
+
+=begin
   def log
     set_car
     @log = Log.new
     @log.car = @car
     @log.owner = @car.owner
   end
-
+=end
   def car_name
     "#{self.year} #{self.make} #{self.model}"
   end
@@ -41,7 +58,8 @@ class CarsController < ApplicationController
 private
 
   def set_car
-    @car = Car.find params[:id]
+    #@car = Car.find params[:id]
+    @car = Car.find_by slug: params[:id]
   end
 
   def car_params
